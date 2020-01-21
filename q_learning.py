@@ -7,9 +7,10 @@ from matplotlib import style
 import time  
 
 class Blob:
-    def __init__(self):
-        self.x = np.random.randint(0, SIZE)
-        self.y = np.random.randint(0, SIZE)
+    def __init__(self, env_size):
+        self.env_size = env_size
+        self.x = np.random.randint(0, env_size)
+        self.y = np.random.randint(0, env_size)
 
     def __str__(self):
         return str(self.x) + str(self.y)
@@ -40,13 +41,13 @@ class Blob:
 
         if self.x < 0:
             self.x = 0
-        elif self.x > SIZE-1:
-            self.x = SIZE-1
+        elif self.x > env_size-1:
+            self.x = env_size-1
         
         if self.y < 0:
             self.y = 0
-        elif self.y > SIZE-1:
-            self.y = SIZE-1
+        elif self.y > env_size-1:
+            self.y = env_size-1
 
 
 if __name__ == "__main__":
@@ -91,9 +92,9 @@ if __name__ == "__main__":
     episode_rewards = []
     
     for episode in range(HM_EPISODES):
-        player = Blob()
-        food = Blob()
-        enemy = Blob()
+        player = Blob(env_size=SIZE)
+        food = Blob(env_size=SIZE)
+        enemy = Blob(env_size=SIZE)
         if episode % SHOW_EVERY == 0:
             #print(f"on #{episode}, epsilon is {epsilon}")
             #print(f"{SHOW_EVERY} ep mean: {np.mean(episode_rewards[-SHOW_EVERY:])}")
